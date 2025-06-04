@@ -1,0 +1,6 @@
+services:
+  database:
+    image: 'bitnami/postgresql:latest'
+    env_file: '.env.development'
+    ports:
+      - '5432:5432'
