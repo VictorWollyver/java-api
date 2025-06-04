@@ -1,5 +1,11 @@
 package com.wollyver.java_api.repositories;
 
-public class UserRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.wollyver.java_api.models.User;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
   
 }
