@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.wollyver.java_api.exceptions.AlreadyExists;
 import com.wollyver.java_api.exceptions.NotFound;
 import com.wollyver.java_api.models.User;
 import com.wollyver.java_api.repositories.UserRepository;
@@ -34,7 +35,7 @@ public class UserService {
 
   public User createUser(User user) {
     User userAlreadyExists = this.getUserByName(user.getName());
-    if(userAlreadyExists != null) throw new RuntimeException("Um usuário com esse nome já existe");
+    if(userAlreadyExists != null) throw new AlreadyExists("Um usuário com esse nome já existe");
 
     user.setPassword(passwordEncoder.encode(user.getPassword()));
 

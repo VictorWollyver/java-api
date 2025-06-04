@@ -31,34 +31,20 @@ public class UserController {
 
   @PostMapping("/create")
   public ResponseEntity<?> createUser(@RequestBody User user) {
-    try {
       User newUser = userService.createUser(user);
       return ResponseEntity.status(201).body(newUser);
-    } catch (Exception e) {
-      return ResponseEntity.status(400).body(e.getMessage());
-    }
   }
 
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-    try {
-      String message = userService.deleteUserById(id);
-      return ResponseEntity.ok(message);
-  
-    } catch (Exception e) {
-      return ResponseEntity.status(404).body(e.getMessage());
-    }
+    String message = userService.deleteUserById(id);
+    return ResponseEntity.ok(message);
   }
 
   @PutMapping("/update/{id}")
   public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User newUser) {
-    try {
       User userUpdated = userService.updateUser(id, newUser);
       return ResponseEntity.status(200).body(userUpdated);
-      
-    } catch (Exception e) {
-      return ResponseEntity.status(404).body(e.getMessage());
-    }
   }
   
 }
