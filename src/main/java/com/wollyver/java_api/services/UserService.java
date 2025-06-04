@@ -21,6 +21,10 @@ public class UserService {
     return userRepository.findAll();
   }
 
+  public User getUserById(Long id) {
+    return userRepository.getReferenceById(id);
+  }
+
   public User createUser(User user) {
     return userRepository.save(user);
   }
@@ -30,5 +34,11 @@ public class UserService {
     return "Usuário deletado com sucesso";
   }
 
+  public User updateUser(Long id, User newUser) {
+    User user = this.getUserById(id);
+    user.setName(newUser.getName());
+    user.setPassword(newUser.getPassword());
+    return userRepository.save(user);
+  }
   
 }
