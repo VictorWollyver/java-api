@@ -7,5 +7,5 @@ import com.wollyver.java_api.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-  
+  User findByName(String name);
 }

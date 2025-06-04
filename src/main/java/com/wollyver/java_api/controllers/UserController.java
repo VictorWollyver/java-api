@@ -25,25 +25,40 @@ public class UserController {
   }
   
   @GetMapping
-  public List<User> getUsers() {
+  public List<User> getAllUsers() {
     return userService.getAllUsers();
   }
 
   @PostMapping("/create")
-  public User createUser(@RequestBody User user) {
-    return userService.createUser(user);
+  public ResponseEntity<?> createUser(@RequestBody User user) {
+    try {
+      User newUser = userService.createUser(user);
+      return ResponseEntity.status(201).body(newUser);
+    } catch (Exception e) {
+      return ResponseEntity.status(400).body(e.getMessage());
+    }
   }
 
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-    String message = userService.deleteUserById(id);
-    return ResponseEntity.ok(message);
+    try {
+      String message = userService.deleteUserById(id);
+      return ResponseEntity.ok(message);
+  
+    } catch (Exception e) {
+      return ResponseEntity.status(404).body(e.getMessage());
+    }
   }
 
   @PutMapping("/update/{id}")
-  public User updateUser(@PathVariable Long id, @RequestBody User newUser) {
-    User userUpdated = userService.updateUser(id, newUser);
-    return userUpdated;
+  public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User newUser) {
+    try {
+      User userUpdated = userService.updateUser(id, newUser);
+      return ResponseEntity.status(200).body(userUpdated);
+      
+    } catch (Exception e) {
+      return ResponseEntity.status(404).body(e.getMessage());
+    }
   }
   
 }
