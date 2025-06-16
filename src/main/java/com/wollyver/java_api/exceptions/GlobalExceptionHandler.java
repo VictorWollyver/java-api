@@ -47,4 +47,16 @@ public class GlobalExceptionHandler {
 
     return new ResponseEntity<>(body, HttpStatus.CONFLICT);
   }
+
+  @ExceptionHandler(Unauthorized.class)
+  public ResponseEntity<Object> handleUnauthorized(Exception ex) {
+    Map<String, Object> body = new LinkedHashMap<>();
+
+    body.put("timestamp", LocalDateTime.now());
+    body.put("status", HttpStatus.UNAUTHORIZED.value());
+    body.put("error", "Recurso não autorizado");
+    body.put("message", ex.getMessage());
+
+    return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
+  }
 }
